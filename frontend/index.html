@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>単語帳アプリ</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <div class="header__container">
+                <h1 class="header__title">単語帳アプリ</h1>
+                <nav class="header__nav">
+                    <button class="nav-button" data-page="home">ホーム</button>
+                    <button class="nav-button" data-page="cards">カード管理</button>
+                    <button class="nav-button" data-page="stats">統計</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="main">
+            <!-- ホームページ -->
+            <div id="home-page" class="page page--active">
+                <div class="home">
+                    <div class="home__header">
+                        <h2 class="home__title">学習を始めましょう</h2>
+                        
+                        <!-- 表示モード切り替え -->
+                        <div class="view-mode-selector">
+                            <label class="view-mode-selector__label">
+                                <input type="radio" name="viewMode" value="front" class="view-mode-selector__input" checked>
+                                <span class="view-mode-selector__text">オモテから見る</span>
+                            </label>
+                            <label class="view-mode-selector__label">
+                                <input type="radio" name="viewMode" value="back" class="view-mode-selector__input">
+                                <span class="view-mode-selector__text">ウラから見る</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 学習統計 -->
+                    <div class="stats-summary">
+                        <div class="stats-summary__item">
+                            <span class="stats-summary__label">復習待ち</span>
+                            <span class="stats-summary__value" id="due-cards-count">-</span>
+                        </div>
+                        <div class="stats-summary__item">
+                            <span class="stats-summary__label">総カード数</span>
+                            <span class="stats-summary__value" id="total-cards-count">-</span>
+                        </div>
+                        <div class="stats-summary__item">
+                            <span class="stats-summary__label">正解率</span>
+                            <span class="stats-summary__value" id="accuracy-rate">-%</span>
+                        </div>
+                    </div>
+
+                    <!-- 学習キュー -->
+                    <div class="learning-queue">
+                        <div class="learning-queue__header">
+                            <h3 class="learning-queue__title">復習予定のカード</h3>
+                            <button class="btn btn--primary" id="start-learning-btn">学習を始める</button>
+                        </div>
+                        
+                        <div class="card-list" id="learning-queue-list">
+                            <!-- カードがここに動的に挿入されます -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- カード管理ページ -->
+            <div id="cards-page" class="page">
+                <div class="cards-manager">
+                    <div class="cards-manager__header">
+                        <h2 class="cards-manager__title">カード管理</h2>
+                        <div class="cards-manager__actions">
+                            <input type="text" class="search-input" id="search-input" placeholder="カードを検索...">
+                            <button class="btn btn--primary" id="add-card-btn">新しいカードを追加</button>
+                        </div>
+                    </div>
+
+                    <div class="card-list" id="all-cards-list">
+                        <!-- カードがここに動的に挿入されます -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 統計ページ -->
+            <div id="stats-page" class="page">
+                <div class="stats">
+                    <h2 class="stats__title">学習統計</h2>
+                    <div class="stats__content" id="stats-content">
+                        <!-- 統計情報がここに動的に挿入されます -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 学習ページ -->
+            <div id="study-page" class="page">
+                <div class="study">
+                    <div class="study__header">
+                        <button class="btn btn--secondary" id="back-to-home-btn">← ホームに戻る</button>
+                        <div class="study__progress">
+                            <span id="current-card-index">1</span> / <span id="total-cards-in-study">1</span>
+                        </div>
+                    </div>
+
+                    <div class="study__content">
+                        <div class="flash-card" id="flash-card">
+                            <div class="flash-card__inner">
+                                <div class="flash-card__front">
+                                    <div class="flash-card__content" id="card-front-content">
+                                        <!-- カードの内容がここに挿入されます -->
+                                    </div>
+                                </div>
+                                <div class="flash-card__back">
+                                    <div class="flash-card__content" id="card-back-content">
+                                        <!-- カードの内容がここに挿入されます -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="study__controls" id="study-controls">
+                            <button class="btn btn--large" id="flip-card-btn">カードをめくる</button>
+                        </div>
+
+                        <div class="study__feedback hidden" id="study-feedback">
+                            <p class="study__feedback-question">答えは想定通りでしたか？</p>
+                            
+                            <div class="difficulty-buttons">
+                                <button class="btn btn--success" data-correct="true" data-difficulty="easy">簡単だった</button>
+                                <button class="btn btn--primary" data-correct="true" data-difficulty="medium">ちょうど良い</button>
+                                <button class="btn btn--warning" data-correct="true" data-difficulty="hard">難しかった</button>
+                                <button class="btn btn--danger" data-correct="false" data-difficulty="medium">間違えた</button>
+                            </div>
+
+                            <div class="schedule-options">
+                                <h4>次回復習時間を設定</h4>
+                                <div class="schedule-buttons">
+                                    <button class="btn btn--outline" data-schedule="hours" data-value="1">1時間後</button>
+                                    <button class="btn btn--outline" data-schedule="hours" data-value="3">3時間後</button>
+                                    <button class="btn btn--outline" data-schedule="days" data-value="1">1日後</button>
+                                    <button class="btn btn--outline" data-schedule="forgetting_curve">忘却曲線自動</button>
+                                </div>
+                                
+                                <div class="custom-schedule">
+                                    <input type="number" id="custom-hours" placeholder="時間" min="1" max="168">
+                                    <button class="btn btn--outline" id="custom-hours-btn">時間後</button>
+                                    
+                                    <input type="number" id="custom-time" placeholder="HHMM" min="0" max="2359">
+                                    <button class="btn btn--outline" id="custom-time-btn">指定時刻</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="study__navigation">
+                            <button class="btn btn--secondary" id="prev-card-btn" disabled>← 前のカード</button>
+                            <button class="btn btn--secondary" id="next-card-btn">次のカード →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- カード編集モーダル -->
+        <div id="card-modal" class="modal">
+            <div class="modal__content">
+                <div class="modal__header">
+                    <h3 class="modal__title" id="modal-title">カードを追加</h3>
+                    <button class="modal__close" id="modal-close">&times;</button>
+                </div>
+
+                <form class="card-form" id="card-form">
+                    <div class="form-group">
+                        <label for="card-title" class="form-label">タイトル</label>
+                        <input type="text" id="card-title" class="form-input" required>
+                    </div>
+
+                    <div class="card-sides">
+                        <div class="card-side">
+                            <h4 class="card-side__title">オモテ</h4>
+                            
+                            <div class="form-group">
+                                <label for="front-text" class="form-label">テキスト</label>
+                                <textarea id="front-text" class="form-textarea"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="front-image" class="form-label">画像</label>
+                                <div class="file-upload" data-type="image" data-side="front">
+                                    <input type="file" id="front-image" class="file-input" accept="image/*">
+                                    <div class="file-upload__area">
+                                        <p>画像をドラッグ&ドロップまたはクリックして選択</p>
+                                        <div class="file-preview" id="front-image-preview"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="front-audio" class="form-label">音声</label>
+                                <div class="file-upload" data-type="audio" data-side="front">
+                                    <input type="file" id="front-audio" class="file-input" accept="audio/*">
+                                    <div class="file-upload__area">
+                                        <p>音声ファイルをドラッグ&ドロップまたはクリックして選択</p>
+                                        <div class="file-preview" id="front-audio-preview"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="front-youtube" class="form-label">YouTube URL</label>
+                                <input type="url" id="front-youtube" class="form-input" placeholder="https://www.youtube.com/watch?v=...">
+                            </div>
+                        </div>
+
+                        <div class="card-side">
+                            <h4 class="card-side__title">ウラ</h4>
+                            
+                            <div class="form-group">
+                                <label for="back-text" class="form-label">テキスト</label>
+                                <textarea id="back-text" class="form-textarea"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="back-image" class="form-label">画像</label>
+                                <div class="file-upload" data-type="image" data-side="back">
+                                    <input type="file" id="back-image" class="file-input" accept="image/*">
+                                    <div class="file-upload__area">
+                                        <p>画像をドラッグ&ドロップまたはクリックして選択</p>
+                                        <div class="file-preview" id="back-image-preview"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="back-audio" class="form-label">音声</label>
+                                <div class="file-upload" data-type="audio" data-side="back">
+                                    <input type="file" id="back-audio" class="file-input" accept="audio/*">
+                                    <div class="file-upload__area">
+                                        <p>音声ファイルをドラッグ&ドロップまたはクリックして選択</p>
+                                        <div class="file-preview" id="back-audio-preview"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="back-youtube" class="form-label">YouTube URL</label>
+                                <input type="url" id="back-youtube" class="form-input" placeholder="https://www.youtube.com/watch?v=...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal__actions">
+                        <button type="button" class="btn btn--secondary" id="cancel-btn">キャンセル</button>
+                        <button type="submit" class="btn btn--primary" id="save-btn">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ローディング -->
+        <div id="loading" class="loading hidden">
+            <div class="loading__spinner"></div>
+        </div>
+
+        <!-- 通知 -->
+        <div id="notification" class="notification hidden">
+            <div class="notification__content">
+                <span class="notification__message"></span>
+                <button class="notification__close">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/card-renderer.js"></script>
+    <script src="js/file-upload.js"></script>
+    <script src="js/study-manager.js"></script>
+    <script src="js/card-manager.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

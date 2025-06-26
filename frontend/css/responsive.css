@@ -1,0 +1,324 @@
+/* モバイルファースト レスポンシブデザイン */
+
+/* スマートフォン（〜575px） */
+@media (max-width: 575px) {
+    .main {
+        padding: var(--spacing-md);
+    }
+    
+    .header__container {
+        padding: var(--spacing-md);
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .header__title {
+        font-size: var(--font-size-xl);
+    }
+    
+    .header__nav {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .nav-button {
+        flex: 1;
+        text-align: center;
+        font-size: var(--font-size-sm);
+    }
+    
+    /* カードリスト */
+    .card-list {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    /* フラッシュカード */
+    .flash-card {
+        width: 100%;
+        max-width: 320px;
+        height: 240px;
+    }
+    
+    /* カード管理ヘッダー */
+    .cards-manager__header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
+    }
+    
+    .cards-manager__actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    /* 統計サマリー */
+    .stats-summary {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    /* 学習フィードバック */
+    .difficulty-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .schedule-buttons {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .custom-schedule {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .custom-schedule input {
+        width: 100%;
+    }
+    
+    /* モーダル */
+    .modal__content {
+        width: 95vw;
+        max-height: 95vh;
+    }
+    
+    .card-sides {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .modal__actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    /* カード詳細 */
+    .card-detail__content {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-detail__side:first-child {
+        border-right: none;
+        border-bottom: var(--border-width) solid var(--border-color);
+    }
+    
+    .card-detail__actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    /* 表示モード選択 */
+    .view-mode-selector {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .view-mode-selector__label {
+        justify-content: center;
+    }
+    
+    /* 学習ナビゲーション */
+    .study__navigation {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .study__header {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+}
+
+/* タブレット（576px〜767px） */
+@media (min-width: 576px) and (max-width: 767px) {
+    .card-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+    
+    .flash-card {
+        width: 350px;
+        height: 260px;
+    }
+    
+    .stats-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .difficulty-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .schedule-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* 小型デスクトップ（768px〜991px） */
+@media (min-width: 768px) and (max-width: 991px) {
+    .card-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+    
+    .flash-card {
+        width: 380px;
+        height: 280px;
+    }
+    
+    .stats-summary {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .cards-manager__actions {
+        flex-direction: row;
+    }
+}
+
+/* 大型デスクトップ（992px〜1199px） */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .card-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .flash-card {
+        width: var(--flash-card-width);
+        height: var(--flash-card-height);
+    }
+}
+
+/* 超大型デスクトップ（1200px〜） */
+@media (min-width: 1200px) {
+    .card-list {
+        grid-template-columns: repeat(auto-fill, minmax(var(--card-width), 1fr));
+    }
+    
+    .main {
+        padding: var(--spacing-xxl);
+    }
+}
+
+/* 横向きモバイル */
+@media (max-width: 767px) and (orientation: landscape) {
+    .flash-card {
+        width: 300px;
+        height: 200px;
+    }
+    
+    .flash-card__content {
+        padding: var(--spacing-md);
+        font-size: var(--font-size-base);
+    }
+    
+    .study__feedback {
+        padding: var(--spacing-md);
+    }
+    
+    .difficulty-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .schedule-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+/* プリント用スタイル */
+@media print {
+    .header,
+    .modal,
+    .loading,
+    .notification,
+    .study__controls,
+    .study__feedback,
+    .study__navigation,
+    .card-item__actions {
+        display: none !important;
+    }
+    
+    .main {
+        padding: 0;
+    }
+    
+    .page {
+        display: block !important;
+    }
+    
+    .card-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    .card-item {
+        break-inside: avoid;
+        box-shadow: none;
+        border: var(--border-width) solid var(--border-color);
+    }
+    
+    .flash-card {
+        break-inside: avoid;
+    }
+    
+    .flash-card__inner {
+        transform: none !important;
+    }
+    
+    .flash-card__back {
+        transform: none !important;
+        position: relative;
+        margin-top: var(--spacing-lg);
+    }
+}
+
+/* 高コントラストモード */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: var(--gray-800);
+        --text-muted: var(--gray-700);
+        --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn {
+        border-width: 2px;
+    }
+    
+    .card-item {
+        border-width: 2px;
+    }
+}
+
+/* ダークモード対応の準備 */
+@media (prefers-color-scheme: dark) {
+    /* 将来的にダークモードを実装する際のベース */
+    /*
+    :root {
+        --bg-color: var(--gray-900);
+        --surface-color: var(--gray-800);
+        --text-color: var(--gray-100);
+        --text-muted: var(--gray-400);
+        --border-color: var(--gray-600);
+    }
+    */
+}
+
+/* アニメーション無効化 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .flash-card__inner {
+        transition: none !important;
+    }
+}

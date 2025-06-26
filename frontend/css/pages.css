@@ -1,0 +1,284 @@
+/* ホームページ */
+.home {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.home__header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.home__title {
+    font-size: var(--font-size-xxxl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-xl);
+}
+
+/* 統計ページ */
+.stats {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stats__title {
+    font-size: var(--font-size-xxxl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.stats__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.stats__section {
+    background-color: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.stats__section-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.stats__metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.stats__metric:last-child {
+    border-bottom: none;
+}
+
+.stats__metric-label {
+    color: var(--text-color);
+    font-weight: var(--font-weight-medium);
+}
+
+.stats__metric-value {
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+}
+
+/* カード管理ページ */
+.cards-manager {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cards-empty {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-muted);
+}
+
+.cards-empty__icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.5;
+}
+
+.cards-empty__message {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* 学習ページ */
+.study {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.study__empty {
+    text-align: center;
+    padding: var(--spacing-xxl);
+}
+
+.study__empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--success-color);
+}
+
+.study__empty-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.study__empty-message {
+    color: var(--text-muted);
+    font-size: var(--font-size-lg);
+}
+
+/* カード詳細表示 */
+.card-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.card-detail__header {
+    padding: var(--spacing-xl);
+    background-color: var(--gray-100);
+    border-bottom: var(--border-width) solid var(--border-color);
+}
+
+.card-detail__title {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-detail__meta {
+    display: flex;
+    gap: var(--spacing-lg);
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.card-detail__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+}
+
+.card-detail__side {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.card-detail__side:first-child {
+    border-right: var(--border-width) solid var(--border-color);
+}
+
+.card-detail__side-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.card-detail__text {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-color);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100px;
+}
+
+.card-detail__image {
+    text-align: center;
+}
+
+.card-detail__image img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    cursor: pointer;
+    transition: transform var(--transition-duration) var(--transition-timing);
+}
+
+.card-detail__image img:hover {
+    transform: scale(1.05);
+}
+
+.card-detail__audio {
+    text-align: center;
+}
+
+.card-detail__youtube {
+    text-align: center;
+}
+
+.card-detail__actions {
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background-color: var(--gray-100);
+    border-top: var(--border-width) solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+/* 画像拡大モーダル */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.image-modal--active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.image-modal__content {
+    max-width: 90vw;
+    max-height: 90vh;
+    text-align: center;
+}
+
+.image-modal__image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var(--border-radius);
+}
+
+.image-modal__close {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    color: var(--white);
+    font-size: 2rem;
+    padding: var(--spacing-sm);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-duration) var(--transition-timing);
+}
+
+.image-modal__close:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
